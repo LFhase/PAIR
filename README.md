@@ -21,7 +21,7 @@ TODO items:
 Recently, there has been a growing surge of interest in enabling machine learning systems to generalize well to Out-of-Distribution (OOD) data. Most efforts are devoted to advancing *optimization objectives* that regularize Empirical Risk Minimization (ERM) to capture the underlying invariance; however, little attention is paid to the *optimization process* of the objectives.
 In fact, the optimization process of the OOD objectives turns out to be substantially more challenging than ERM.
 When optimizing the ERM and OOD objectives,
-$$\min_f (\mathcal{L}_\text{ERM},\mathcal{L}_\text{OOD})^T$$
+$$\min_f (L_\text{ERM},L_\text{OOD})^T$$ 
 there often exists an **<ins>optimization dilemma</ins>** in the training of the OOD objectives:
 
 <div id="banner" style="overflow: hidden;justify-content:space-around;">
@@ -43,11 +43,11 @@ there often exists an **<ins>optimization dilemma</ins>** in the training of the
 </div>
 </div>
 
-1. The original OOD objectives are often hard to be optimized directly (e.g., IRM), hence they are **<ins>relaxed as regularization terms</ins>** of ERM (e.g., IRMv1), i.e., $\min_f \mathcal{L}_\text{ERM}+\lambda \widehat{\mathcal{L}}_\text{OOD}$, which can behave very differently and introduce huge gaps with the original one.
+1. The original OOD objectives are often hard to be optimized directly (e.g., IRM), hence they are **<ins>relaxed as regularization terms</ins>** of ERM (e.g., IRMv1), i.e., $\min_f L_\text{ERM}+\lambda \widehat{L}_\text{OOD}$, which can behave very differently and introduce huge gaps with the original one.
 As shown in figure *(a)*, the ellipsoids denote solutions that satisfy the invariance constraints of practical IRM variant IRMv1. When optimized with ERM, IRMv1 prefers $f_1$ instead of $f_\text{IRM}$(The predictor produced by IRM).
 
 2. The **<ins>intrinsic conflicts</ins>** between ERM and OOD objectives brings conflicts in gradients that further increases the optimization difficulty, as shown in figure *(b)*. Consequently, it often require careful tuning of the penalty weights (the $\lambda$). Figure (d) shows an example that IRMv1 usually requires exhaustive tuning of hyperparameters ($y$-axis: penalty weights; $x$-axis: ERM pre-training epochs before applying IRMv1 penalty),
-Especially, the Multi-Objective Optimization (MOO) theory the typically used linear weighting scheme, i.e., $\min_f \mathcal{L}_\text{ERM}+\lambda \widehat{\mathcal{L}}_\text{OOD}$ cannot reach any solutions in the non-convex part of the Pareto front, as shown in figure *(c)*, and lead to suboptimal OOD generalization performance.
+Especially, the Multi-Objective Optimization (MOO) theory the typically used linear weighting scheme, i.e., $\min_f L_\text{ERM}+\lambda \widehat{L}_\text{OOD}$ cannot reach any solutions in the non-convex part of the Pareto front, as shown in figure *(c)*, and lead to suboptimal OOD generalization performance.
 
 3. Along with the optimization dilemma is another challenge, i.e., **<ins>model selection</ins>** during the training with the OOD objectives. As we lack the access to a validation set that have a similar distribution with the test data, <a href="https://github.com/facebookresearch/DomainBed">DomainBed</a> provides 3 options to choose and construct a validation set from: training domain data; leave-one-out validation data; test domain data. However, all three validation set construction approaches have their own limitations, as they essentially posit different **<ins> assumptions on the test distribution</ins>**.
 
