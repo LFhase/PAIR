@@ -14,7 +14,7 @@ This repo contains the sample code for reproducing the results of our ICLR 2023:
 
 TODO items:
 
-- [ ] Camera ready version of the paper [link](https://openreview.net/forum?id=esFxSb_0pSL)!
+- [x] Camera ready version of the paper [link](https://openreview.net/forum?id=esFxSb_0pSL)!
 - [ ] Full instructions to reproduce results.
 
 ## Introduction
