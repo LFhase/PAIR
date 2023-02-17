@@ -23,25 +23,19 @@ In fact, the optimization process of the OOD objectives turns out to be substant
 When optimizing the ERM and OOD objectives,
 $$\min_f (L_\text{ERM},L_\text{OOD})^T$$ 
 there often exists an **<ins>optimization dilemma</ins>** in the training of the OOD objectives:
+<p align="center">
+  <img alt="Light" src="figures/Fail_IRMS_Sqls.png" width="30%">
+  <img alt="Dark" src="figures/grad_conflicts.png" width="22.5%">
+  <img alt="Dark" src="figures/bad_scalar.png" width="24%">
+  <img alt="Dark" src="figures/sweep_acc.png" width="19.5%">
+</p>
+<p align="center" style="font-size:8.5pt">
+  <em>(a).</em> Theoretical failure case. &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
+  <em>(b).</em> Gradient conflicts. &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
+  <em>(c).</em> Unreliable Opt. Scheme. &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
+  <em>(d).</em> Exhaustive tunning.
+</p>
 
-<div id="banner" style="overflow: hidden;justify-content:space-around;">
-<div class="pic" style="max-width: 30%;max-height: 20%;display: inline-block;">
-    <img src="figures/Fail_IRMS_Sqls.png">
-    <p align="center" style="font-size:8.5pt"><em>(a).</em> Theoretical failure case.</p>
-</div>
-<div class="pic" style="max-width: 22.5%;max-height: 20%;display: inline-block;">
-     <img src="figures/grad_conflicts.png">
-     <p align="center" style="font-size:8.5pt"><em>(b).</em> Gradient conflicts.</p>
-</div>
-<div class="pic" style="max-width: 24%;max-height: 20%;display: inline-block;">
-    <img src="figures/bad_scalar.png">
-    <p align="center" style="font-size:8.5pt"><em>(c).</em> Unreliable Opt. Scheme.</p>
-</div>
-<div class="pic" style="max-width: 19.5%;max-height: 20%;display: inline-block;">
-    <img src="figures/sweep_acc.png">
-    <p align="center" style="font-size:8.5pt"><em>(d).</em> Exhaustive tunning.</p>
-</div>
-</div>
 
 1. The original OOD objectives are often hard to be optimized directly (e.g., IRM), hence they are **<ins>relaxed as regularization terms</ins>** of ERM (e.g., IRMv1), i.e., $\min_f L_\text{ERM}+\lambda \widehat{L}_\text{OOD}$, which can behave very differently and introduce huge gaps with the original one.
 As shown in figure *(a)*, the ellipsoids denote solutions that satisfy the invariance constraints of practical IRM variant IRMv1. When optimized with ERM, IRMv1 prefers $f_1$ instead of $f_\text{IRM}$(The predictor produced by IRM).
