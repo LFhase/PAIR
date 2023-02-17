@@ -23,7 +23,7 @@ In fact, the optimization process of the OOD objectives turns out to be substant
 When optimizing the ERM and OOD objectives,
 $$\min_f (L_\text{ERM},L_\text{OOD})^T$$ 
 there often exists an **<ins>optimization dilemma</ins>** in the training of the OOD objectives:
-<p align="center">
+<!-- <p align="center">
   <img alt="Light" src="figures/Fail_IRMS_Sqls.png" width="30%">
   <img alt="Dark" src="figures/grad_conflicts.png" width="22.5%">
   <img alt="Dark" src="figures/bad_scalar.png" width="24%">
@@ -34,15 +34,15 @@ there often exists an **<ins>optimization dilemma</ins>** in the training of the
   <em>(b).</em> Gradient conflicts. &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
   <em>(c).</em> Unreliable Opt. Scheme. &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
   <em>(d).</em> Exhaustive tunning.
-</p>
-
+</p> -->
+<p align="center"><img src="./figures/pair_motivation.png"></p>
 
 1. The original OOD objectives are often hard to be optimized directly (e.g., IRM), hence they are **<ins>relaxed as regularization terms</ins>** of ERM (e.g., IRMv1), i.e., $\min_f L_\text{ERM}+\lambda \widehat{L}\_\text{OOD}$, which can behave very differently and introduce huge gaps with the original one. As shown in figure *(a)*, the ellipsoids denote solutions that satisfy the invariance constraints of practical IRM variant IRMv1. When optimized with ERM, IRMv1 prefers $f_1$ instead of $f_\text{IRM}$ (The predictor produced by IRM).
 
 2. The **<ins>intrinsic conflicts</ins>** between ERM and OOD objectives brings conflicts in gradients that further increases the optimization difficulty, as shown in figure *(b)*. Consequently, it often require careful tuning of the penalty weights (the $\lambda$). Figure (d) shows an example that IRMv1 usually requires exhaustive tuning of hyperparameters ($y$-axis: penalty weights; $x$-axis: ERM pre-training epochs before applying IRMv1 penalty),
 Especially, the Multi-Objective Optimization (MOO) theory the typically used linear weighting scheme, i.e., $\min_f L_\text{ERM}+\lambda \widehat{L}\_\text{OOD}$ cannot reach any solutions in the non-convex part of the Pareto front, as shown in figure *(c)*, and lead to suboptimal OOD generalization performance.
 
-3. Along with the optimization dilemma is another challenge, i.e., **<ins>model selection</ins>** during the training with the OOD objectives. As we lack the access to a validation set that have a similar distribution with the test data, <a href="https://github.com/facebookresearch/DomainBed">DomainBed</a> provides 3 options to choose and construct a validation set from: training domain data; leave-one-out validation data; test domain data. However, all three validation set construction approaches have their own limitations, as they essentially posit different **<ins> assumptions on the test distribution</ins>**.
+1. Along with the optimization dilemma is another challenge, i.e., **<ins>model selection</ins>** during the training with the OOD objectives. As we lack the access to a validation set that have a similar distribution with the test data, <a href="https://github.com/facebookresearch/DomainBed">DomainBed</a> provides 3 options to choose and construct a validation set from: training domain data; leave-one-out validation data; test domain data. However, all three validation set construction approaches have their own limitations, as they essentially posit different **<ins> assumptions on the test distribution</ins>**.
 
 This work provides understandings and solutions to the aforementioned challenges from the MOO perspective, which leads to a new optimization scheme for OOD generalization, called PAreto Invariant Risk Minimization (`PAIR`), including an optimizer `PAIR-o` and a new model selection criteria `PAIR-s`.
 
