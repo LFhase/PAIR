@@ -13,9 +13,9 @@
 This repo contains the sample code for reproducing the results of our ICLR 2023: *[Pareto Invariant Risk Minimization](https://arxiv.org/abs/2206.07766)*, which has also been presented at [ICML PODS](https://sites.google.com/view/scis-workshop/home) Workshop. 😆😆😆
 
 TODO items:
-- [] Camera ready version of the paper. 
-<!-- ([link](https://arxiv.org/abs/2202.05441))! -->
-- [] Full instructions to reproduce results.
+
+- [ ] Camera ready version of the paper <!-- [link](https://openreview.net/forum?id=esFxSb_0pSL)! -->
+- [ ] Full instructions to reproduce results.
 
 ## Introduction
 Recently, there has been a growing surge of interest in enabling machine learning systems to generalize well to Out-of-Distribution (OOD) data. Most efforts are devoted to advancing *optimization objectives* that regularize Empirical Risk Minimization (ERM) to capture the underlying invariance; however, little attention is paid to the *optimization process* of the objectives.
@@ -26,19 +26,19 @@ there often exists an **<ins>optimization dilemma</ins>** in the training of the
 
 <div id="banner" style="overflow: hidden;justify-content:space-around;">
 <div class="pic" style="max-width: 30%;max-height: 20%;display: inline-block;">
-    <img src=".figures/Fail_IRMS_Sqls.png">
+    <img src="figures/Fail_IRMS_Sqls.png">
     <p align="center" style="font-size:8.5pt"><em>(a).</em> Theoretical failure case.</p>
 </div>
 <div class="pic" style="max-width: 22.5%;max-height: 20%;display: inline-block;">
-     <img src=".figures/grad_conflicts.png">
+     <img src="figures/grad_conflicts.png">
      <p align="center" style="font-size:8.5pt"><em>(b).</em> Gradient conflicts.</p>
 </div>
 <div class="pic" style="max-width: 24%;max-height: 20%;display: inline-block;">
-    <img src=".figures/bad_scalar.png">
+    <img src="figures/bad_scalar.png">
     <p align="center" style="font-size:8.5pt"><em>(c).</em> Unreliable Opt. Scheme.</p>
 </div>
 <div class="pic" style="max-width: 19.5%;max-height: 20%;display: inline-block;">
-    <img src=".figures/sweep_acc.png">
+    <img src="figures/sweep_acc.png">
     <p align="center" style="font-size:8.5pt"><em>(d).</em> Exhaustive tunning.</p>
 </div>
 </div>
