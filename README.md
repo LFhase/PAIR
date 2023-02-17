@@ -10,11 +10,11 @@
    <!--  <a href="https://icml.cc/media/PosterPDFs/ICML%202022/a8acc28734d4fe90ea24353d901ae678.png"> <img src="https://img.shields.io/badge/Poster-grey?logo=airplayvideo&logoColor=white" alt="Poster"></a> -->
 </p>
 
-This repo contains the sample code for reproducing the results of our ICLR 2023: *[Pareto Invariant Risk Minimization: Towards Mitigating the Optimization Dilemma in Out-of-Distribution Generalization](https://arxiv.org/abs/2206.07766)*, which has also been presented at [ICML PODS](https://sites.google.com/view/scis-workshop/home) Workshop. 😆😆😆
+This repo contains the sample code for reproducing the results of our ICLR 2023: *[Pareto Invariant Risk Minimization: Towards Mitigating the Optimization Dilemma in Out-of-Distribution Generalization](https://openreview.net/forum?id=esFxSb_0pSL)*, which has also been presented at [ICML PODS](https://sites.google.com/view/scis-workshop/home) Workshop. 😆😆😆
 
 TODO items:
 
-- [ ] Camera ready version of the paper <!-- [link](https://openreview.net/forum?id=esFxSb_0pSL)! -->
+- [ ] Camera ready version of the paper [link](https://openreview.net/forum?id=esFxSb_0pSL)!
 - [ ] Full instructions to reproduce results.
 
 ## Introduction
@@ -123,10 +123,10 @@ and then run the corresponding commands in DomainBed.
 If you find our paper and repo useful, please cite our paper:
 
 ```bibtex
-@inproceedings{pair,
-title={Pareto Invariant Risk Minimization},
-author={Yongqiang Chen and Kaiwen Zhou and Yatao Bian and Binghui Xie and Bingzhe Wu and Yonggang Zhang and Kaili Ma and Han Yang and Peilin Zhao and Bo Han and James Cheng},
-booktitle={International Conference on Learning Representations},
+@inproceedings{chen2023pair,
+title={Pareto Invariant Risk Minimization: Towards Mitigating the Optimization Dilemma in Out-of-Distribution Generalization},
+author={Yongqiang Chen and Kaiwen Zhou and Yatao Bian and Binghui Xie and Bingzhe Wu and Yonggang Zhang and MA KAILI and Han Yang and Peilin Zhao and Bo Han and James Cheng},
+booktitle={The Eleventh International Conference on Learning Representations },
 year={2023},
 url={https://openreview.net/forum?id=esFxSb_0pSL}
 }
