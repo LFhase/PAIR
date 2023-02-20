@@ -52,7 +52,7 @@ This work provides understanding to the aforementioned challenges from the Multi
 
 3. `PAIR-s` addresses the challenge of finding a proper validation set for model selection in OOD generalization, by leveraging **<ins>the prior assumed by the OOD objective</ins>**, i.e., the OOD loss values.
 
-We conducted extensive experiments on challenging OOD benchmarks. Empirical results show that `PAIR-o` successfully alleviates the objective conflicts and empowers IRMv1 to achieve high performance in $6$ datasets from <a href="https://wilds.stanford.edu">WILDS</a>. `PAIR-s` effectively improves the performance of selected OOD models up to $10\%$ across $3$ datasets from <a href="https://github.com/facebookresearch/DomainBed">DomainBed</a>.
+We conducted extensive experiments on challenging OOD benchmarks. Empirical results show that `PAIR-o` successfully alleviates the objective conflicts and empowers IRMv1 to achieve high performance in $6$ datasets from <a href="https://wilds.stanford.edu">WILDS</a>. `PAIR-s` effectively improves the performance of selected OOD models up to $10$% across $3$ datasets from <a href="https://github.com/facebookresearch/DomainBed">DomainBed</a>.
 
 ## Structure of Codebase
 
@@ -73,12 +73,12 @@ To reproduce results of PAIR, simply run the following commands under the direct
 
 For the original ColoredMNIST data (CMNIST-25):
 ```
-python run_exp.py  --methods pair  --verbose True --penalty_anneal_iters 150 --dataset coloredmnist025 --n_restarts 10 --lr 0.1 --opt 'test' 
+python run_exp.py  --methods pair  --verbose True --penalty_anneal_iters 150 --dataset coloredmnist025 --n_restarts 10 --lr 0.1 --opt 'pair' 
 ```
 
 For the modified ColoredMNIST data (CMNIST-01):
 ```
-python run_exp.py  --methods pair  --verbose True --penalty_anneal_iters 150 --dataset coloredmnist01 --n_restarts 10 --lr 0.01 --opt 'test'
+python run_exp.py  --methods pair  --verbose True --penalty_anneal_iters 150 --dataset coloredmnist01 --n_restarts 10 --lr 0.01 --opt 'pair'
 ```
 
 ## WILDS
