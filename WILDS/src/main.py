@@ -63,8 +63,8 @@ parser.add_argument('--eps', type=float, default=1e-4)   # if there is another p
 parser.add_argument('--preference_choice','-pc',type=int,default=0)
 parser.add_argument('--num_workers','-nw',type=int,default=4)
 parser.add_argument('--frozen', action='store_true', default=False) # whether to frozen the featurizer
-parser.add_argument('--adjust_irm', '-ai',action='store_true', default=False) # whether to adjust some negative irm penalties in pair by adding up a positive number
 parser.add_argument('--adjust_loss', '-al',action='store_true', default=False) # whether to adjust some negative irm penalties in pair by multiplying a negative number
+parser.add_argument('--adjust_loss_coe', '-ac',type=float, default=1e-2) # the coefficient for negative irm penalty adjustment
 
 parser.add_argument('--need_pretrain', action='store_true')
 parser.add_argument('--adjust_lr', '-alr',action='store_true', default=False) # whether to adjust lr as scheduled after pretraining
@@ -324,17 +324,10 @@ from wilds.common.utils import split_into_groups
 import torch.autograd as autograd
 import torch.nn.functional as F
 scale = torch.tensor(1.).to(device).requires_grad_()
-def irm_penalty(losses, pos=-1, adjust=False):
+def irm_penalty(losses):
     grad_1 = autograd.grad(losses[0::2].mean(), [scale], create_graph=True)[0]
     grad_2 = autograd.grad(losses[1::2].mean(), [scale], create_graph=True)[0]
     result = torch.sum(grad_1 * grad_2)
-    if pos>0 and not adjust:
-        # grad = autograd.grad(losses.mean(), [scale], create_graph=True)[0]
-        # result = torch.sum(grad.pow(2))
-        result += pos
-    if result<0 and adjust:
-        grad = autograd.grad(losses.mean(), [scale], create_graph=True)[0]
-        result = torch.sum(grad.pow(2))
     return result
 
 def train_irmx(train_loader, epoch, agg):
@@ -584,10 +577,9 @@ def train_vrex(train_loader, epoch, agg):
                 save_best_model(model, runPath, agg, args)
 
 
-amplify = 1e2 if (not args.adjust_irm and not args.adjust_loss) else 1
+
 preference = get_preference(args.preference_choice)
 n_tasks = 1+2
-preference[1]/=amplify+1e-6
 pair_optimizer = PAIR(trainable_params,optimiserC,preference=preference,eps=args.eps)
 descent = 0
 def train_pair(train_loader, epoch, agg):
@@ -619,19 +611,20 @@ def train_pair(train_loader, epoch, agg):
             else:
                 loss = F.cross_entropy(scale * y_hat,y,reduction="none")
             losses_bygroup.append(loss.mean())
-
-            if args.adjust_loss:
-                penalty += irm_penalty(loss)
-            else:
-                penalty += irm_penalty(loss,pos=amplify,adjust=args.adjust_irm)
+            penalty += irm_penalty(loss)
             avg_loss += loss.mean()
         avg_loss /= args.meta_steps
         penalty /= args.meta_steps
         losses = [avg_loss, penalty, torch.stack(losses_bygroup).var()]
+        # log the obtained loss values
         if len(running_losses)==0:
             running_losses = [0]*len(losses)
         for (j,loss) in enumerate(running_losses):
             running_losses[j]+=losses[j].item()
+        # adjust all losses to be positive
+        if args.adjust_loss and losses[1].item()<0:
+            losses[1] *= -args.adjust_loss_coe
+        
         pair_optimizer.zero_grad()
         pair_optimizer.set_losses(losses)
         pair_loss, moo_losses, mu_rl, alphas = pair_optimizer.step()
@@ -648,9 +641,6 @@ def train_pair(train_loader, epoch, agg):
 
         if i % args.print_iters == 0 and args.print_iters != -1:            
             agg['losses'].append([l / args.print_iters for l in running_losses])
-            # compensate the irm penalty
-            if not args.adjust_irm  and not args.adjust_loss:
-                agg['losses'][-1][1] -= amplify
 
             if not args.no_wandb:
                 wandb.log({ "loss": loss.item(),

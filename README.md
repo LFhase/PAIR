@@ -12,10 +12,12 @@
 
 This repo contains the sample code for reproducing the results of our ICLR 2023: *[Pareto Invariant Risk Minimization: Towards Mitigating the Optimization Dilemma in Out-of-Distribution Generalization](https://openreview.net/forum?id=esFxSb_0pSL)*, which has also been presented as ***oral*** at [ICLR DG](https://domaingen.github.io/), and at [ICML PODS](https://sites.google.com/view/scis-workshop/home) Workshop. 😆😆😆
 
-TODO items:
+Updates:
 
 - [x] Camera ready version of the paper [link](https://openreview.net/forum?id=esFxSb_0pSL)!
-- [ ] Full instructions to reproduce results.
+- [x] PAIR is accepted as an ***oral presentation*** by [ICLR DG](https://domaingen.github.io/) workshop!
+- [x] Full instructions to reproduce results are released.
+- [x] Slides are released [link](https://lfhase.win/files/slides/ParetoIRM.pdf).
 
 ## Introduction
 Recently, there has been a growing surge of interest in enabling machine learning systems to generalize well to Out-of-Distribution (OOD) data. Most efforts are devoted to advancing *optimization objectives* that regularize Empirical Risk Minimization (ERM) to capture the underlying invariance; however, little attention is paid to the *optimization process* of the objectives.
@@ -84,12 +86,15 @@ python run_exp.py  --methods pair  --verbose True --penalty_anneal_iters 150 --d
 ## WILDS
 The corresponding code is in the folder [WILDS](./WILDS).
 The code is modified from [Fish](https://github.com/YugeTen/fish).
-The dependencies and running commands are the same as for [Fish](https://github.com/YugeTen/fish).
-For example,
+The dependencies and running commands are the same as for [Fish](https://github.com/YugeTen/fish),
+while we use `wilds 2.0` following the latest official recommendations.
+
+To run with wilds codes,
+for example,
 ```
-python main.py --need_pretrain --data-dir ./data --dataset civil --algorithm pair -pc 3 --seed 0 -ac 1e-4
+python main.py --need_pretrain --data-dir ./data --dataset civil --algorithm pair -pc 3 --seed 0 -ac 1e-4 -al
 ```
-We add additional commands to control `PAIR-p`:
+We add additional commands to control `PAIR-o`:
 - `-pc`: specify preferences;
 - `--use_old`: to avoid repeated pretraining of ERM and directly use the pretrained weights;
 
@@ -98,8 +103,7 @@ To avoid negative loss inputs, we use the following commands to adjust IRMv1 los
 - `-ai`: adjust negative irm penalties in pair by adding up a sufficient large number;
 
 We also provide a accelerated mode by freezing the featurizer by specifying `--frozen`.
-
-Note that we use `wilds 2.0` following the latest official recommendations.
+The running scripts fow wilds experiments can be found [here](./WILDS/scripts).
 
 
 
