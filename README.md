@@ -14,6 +14,7 @@ This repo contains the sample code for reproducing the results of our ICLR 2023:
 
 Updates:
 
+- [x] A [introductory blog](https://mp.weixin.qq.com/s/F9_VZhDB6dsCkp4xe9ktdQ) in Chinese is released. Welcome to check it out! 😆
 - [x] Results are updated to [Wilds leaderboard](https://wilds.stanford.edu/leaderboard/). Note there are some slight differences due to the [evaluation](./WILDS/README.md).
 - [x] Camera ready version of the paper [link](https://openreview.net/forum?id=esFxSb_0pSL)!
 - [x] PAIR is accepted as an ***oral presentation*** by [ICLR DG](https://domaingen.github.io/) workshop!
