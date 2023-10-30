@@ -60,9 +60,9 @@ We conducted extensive experiments on challenging OOD benchmarks. Empirical resu
 
 ## Structure of Codebase
 
-The whole code base contain four parts, corresponding to experiments presented in the paper:
+The whole codebase contains four parts, corresponding to experiments presented in the paper:
 - `Extrapolation`: Recovery of Causal Invariance
-- `Extrapolation`: Proof of Concept on ColoredMNIST
+- `ColoredMNIST`: Proof of Concept on ColoredMNIST
 - `WILDS`: Verification of PAIR-o in WILDS
 - `DomainBed`: Verification of PAIR-s in DomainBed
 
@@ -73,7 +73,7 @@ We provide a minimal demo code for the experiments on the recovery of causal inv
 ## ColoredMNIST
 The corresponding code is in the folder [ColoredMNIST](./ColoredMNIST).
 The code is modified from [RFC](https://github.com/TjuJianyu/RFC/).
-To reproduce results of PAIR, simply run the following commands under the directory:
+To reproduce the results of PAIR, simply run the following commands under the directory:
 
 For the original ColoredMNIST data (CMNIST-25):
 ```
@@ -104,8 +104,8 @@ To avoid negative loss inputs, we use the following commands to adjust IRMv1 los
 - `-al` and `-ac`: adjust negative irm penalties in pair by multiplying a negative number;
 - `-ai`: adjust negative irm penalties in pair by adding up a sufficient large number;
 
-We also provide a accelerated mode by freezing the featurizer by specifying `--frozen`.
-The running scripts fow wilds experiments can be found [here](./WILDS/scripts).
+We also provide an accelerated mode by freezing the featurizer by specifying `--frozen`.
+The running scripts for wilds experiments can be found [here](./WILDS/scripts).
 
 
 
