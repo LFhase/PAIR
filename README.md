@@ -14,6 +14,7 @@ This repo contains the sample code for reproducing the results of our ICLR 2023:
 
 Updates:
 
+- [x] For deep networks, it might be a bit hard to apply PAIR to tune the whole models together. In this case, we recommend to first pretrain the feature extractor with our newly released feature learning algorithm [FeAT](https://github.com/LFhase/FeAT), and then freeze it and tune the last layer with PAIR! 😆😆😆
 - [x] A [introductory blog](https://mp.weixin.qq.com/s/F9_VZhDB6dsCkp4xe9ktdQ) in Chinese is released. Welcome to check it out! 😆
 - [x] Results are updated to [Wilds leaderboard](https://wilds.stanford.edu/leaderboard/). Note there are some slight differences due to the [evaluation](./WILDS/README.md).
 - [x] Camera ready version of the paper [link](https://openreview.net/forum?id=esFxSb_0pSL)!
@@ -123,6 +124,8 @@ Based on three options of validation set choice, we implement corresponding `PAI
 To use `PAIR-s`, simply add the corresponding functions or replace the original `model_selection.py` with ours,
 and then run the corresponding commands in DomainBed.
 
+## Tips
+- For deep networks, it might be a bit hard to apply PAIR to tune the whole models together. In this case, we recommend to first pretrain the feature extractor with our newly released feature learning algorithm [FeAT](https://github.com/LFhase/FeAT), and then freeze it and tune the last layer with PAIR! 😆😆😆
 
 ## Misc
 
