@@ -593,7 +593,6 @@ def train_pair(train_loader, epoch, agg):
     running_losses = []
     while sum([l > 1 for l in train_loader.dataset.batches_left.values()]) >= args.meta_steps:
         model.train()
-        args.eval_iters = 5
         i += 1
         # sample `meta_steps` number of domains to use for the inner loop
         domains = sample_domains(train_loader, args.meta_steps, args.stratified).tolist()
