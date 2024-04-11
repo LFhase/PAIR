@@ -99,7 +99,6 @@ def pair_train(mlp, topmlp, steps, envs, test_envs, lossf, \
             optimizer.zero_grad()
             optimizer.set_losses(losses=losses)
             pair_loss, moo_losses, mu_rl, alphas = optimizer.step()
-            pair_res = np.array([pair_loss, mu_rl, alphas])
         else:
             loss = erm_loss
         

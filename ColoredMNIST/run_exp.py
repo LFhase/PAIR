@@ -173,10 +173,10 @@ def main(flags):
             np.save(os.path.join(flags.save_dir,'group%d.npy' % restart), group)
             np.save(os.path.join(flags.save_dir,'pseudolabel%d.npy' % restart), pseudolabel )
 
-    logs = np.array(logs)
+    # logs = np.array(logs)
     
-    if flags.save_dir is not None:
-        np.save(os.path.join(flags.save_dir,'logs.npy'), logs)
+    # if flags.save_dir is not None:
+    #     np.save(os.path.join(flags.save_dir,'logs.npy'), logs)
 
     return results, logs
 

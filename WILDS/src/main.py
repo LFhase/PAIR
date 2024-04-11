@@ -22,7 +22,7 @@ from utils import get_preference, set_seed, unpack_data, sample_domains, save_be
     Logger, return_predict_fn, return_criterion, fish_step
 
 # This is secret and shouldn't be checked into version control
-os.environ["WANDB_API_KEY"]=None
+# os.environ["WANDB_API_KEY"]=None
 # Name and notes optional
 # WANDB_NAME="My first run"
 # WANDB_NOTES="Smaller learning rate, more regularization."
@@ -192,6 +192,7 @@ elif args.dataset.lower() in ["iwildcam","rxrx"]:
 else:
     classifier = model.classifier
 trainable_params = classifier.parameters() if args.frozen else model.parameters()
+trainable_params = list(trainable_params)
 optimiserC = opt(trainable_params, **args.optimiser_args)
 predict_fn, criterion = return_predict_fn(args.dataset), return_criterion(args.dataset)
 
