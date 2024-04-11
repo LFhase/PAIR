@@ -106,7 +106,10 @@ class PAIR(Optimizer):
                 alpha = self.preference / np.sum(self.preference)
             
             scales = torch.from_numpy(alpha).float().to(losses[-1].device)
-            pair_loss = scales.dot(losses)
+            pair_loss = 0.0
+            for i in range(len(scales)):
+                pair_loss += scales[i] * losses[i]
+            # pair_loss = scales.dot(losses)
             if reset_optimizer:
                 self.optimizer.param_groups[0]["lr"]/=5
                 # self.optimizer = torch.optim.Adam(self.params,lr=self.optimizer.param_groups[0]["lr"]/5)
