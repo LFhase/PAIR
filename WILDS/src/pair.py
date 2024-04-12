@@ -88,8 +88,8 @@ class PAIR(Optimizer):
                 grads.append(torch.cat(cur_grad))
 
             G = torch.stack(grads)
-            if self.get_grad_sim:
-                grad_sim = get_grad_sim(G,losses,preference=self.preference,is_G=True)
+            # if self.get_grad_sim:
+            #     grad_sim = get_grad_sim(G,losses,preference=self.preference,is_G=True)
             GG = G @ G.T
             moo_losses = np.stack([l.item() for l in losses])
             reset_optimizer = False
@@ -106,7 +106,10 @@ class PAIR(Optimizer):
                 alpha = self.preference / np.sum(self.preference)
             
             scales = torch.from_numpy(alpha).float().to(losses[-1].device)
-            pair_loss = scales.dot(losses)
+            pair_loss = 0.0
+            for i in range(len(scales)):
+                pair_loss += scales[i] * losses[i]
+            # pair_loss = scales.dot(losses)
             if reset_optimizer:
                 self.optimizer.param_groups[0]["lr"]/=5
                 # self.optimizer = torch.optim.Adam(self.params,lr=self.optimizer.param_groups[0]["lr"]/5)
@@ -120,7 +123,6 @@ class PAIR(Optimizer):
 
 import numpy as np
 import cvxpy as cp
-import cvxopt
 
 class EPO(object):
     r"""
